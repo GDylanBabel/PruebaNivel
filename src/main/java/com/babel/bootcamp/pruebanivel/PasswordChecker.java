@@ -18,8 +18,8 @@ public class PasswordChecker {
      */
     public PasswordChecker(int umbral) {
         this.umbral = umbral;
-        readPassword();
         this.level = 0;
+        readPassword();
     }
 
     /**
@@ -99,20 +99,20 @@ public class PasswordChecker {
      */
     private void checkContains() {
         // Patrones con expresiones regulares que comprueban si la contraseña contiene o no los caracteres indicados
-        Pattern letter = Pattern.compile("[A-Z]");
+        Pattern upperCase = Pattern.compile("[A-Z]");
         Pattern lowerCase = Pattern.compile("[a-z]");
         Pattern digit = Pattern.compile("[0-9]");
-        Pattern special = Pattern.compile("[/'.'·,;:!@#$%&*()_+=|<>?{}\\[\\]~-]");
+        Pattern specialCharacter = Pattern.compile("[/'.'·,;:!@#$%&*()_+=|<>?{}\\[\\]~-]");
 
         // Matchers para comprobar que la contraseña cumple las regexp dadas
-        Matcher hasMayusLetter = letter.matcher(this.password);
-        Matcher hasAnyLetter = lowerCase.matcher(this.password);
+        Matcher hasUpperCaseLetter = upperCase.matcher(this.password);
+        Matcher hasLowerCaseLetter = lowerCase.matcher(this.password);
         Matcher hasDigit = digit.matcher(this.password);
-        Matcher hasSpecial = special.matcher(this.password);
+        Matcher hasSpecial = specialCharacter.matcher(this.password);
 
         // Comprobamos las letras por separado y a continuación las juntamos
-        boolean smallCasePresent = hasAnyLetter.find();
-        boolean upperCasePresent = hasMayusLetter.find();
+        boolean smallCasePresent = hasLowerCaseLetter.find();
+        boolean upperCasePresent = hasUpperCaseLetter.find();
         boolean isLetterPresent = smallCasePresent || upperCasePresent;
         // Comprobamos ambas, ya que buscamos que tenga tanto mayúsculas como minúsculas
         boolean areMayusAndMinusPresent = upperCasePresent && smallCasePresent;
