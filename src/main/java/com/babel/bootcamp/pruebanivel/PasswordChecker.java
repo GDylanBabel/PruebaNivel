@@ -1,5 +1,7 @@
 package com.babel.bootcamp.pruebanivel;
 
+import com.babel.bootcamp.pruebanivel.util.ConsoleReader;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,6 +13,7 @@ public class PasswordChecker {
     private int level;
     private boolean isMaxCombination = true;
     private final String[] strengthLevels = {"Muy débil", "Débil", "Moderada", "Fuerte", "Muy fuerte"};
+
 
     /**
      * Comprueba que la contraseña introducida tiene un nivel mínimo de seguridad
@@ -28,8 +31,7 @@ public class PasswordChecker {
     private void readPassword(){
         // Tomamos el input de la  contraseña
         System.out.println("Por favor, introduzca su contraseña: ");
-        Scanner terminalInput = new Scanner(System.in);
-        this.password = terminalInput.nextLine();
+        this.password = ConsoleReader.readString();
     }
 
     /**
